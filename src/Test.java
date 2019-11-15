@@ -9,8 +9,8 @@ import java.io.IOException;
 public class Test {
     public static void main(String[] args) {
         try {
-            DataMap dataMap = DataMapBuilder.fromIntFile("Resources/noise.txt");
-            File outputFile = new File("image.jpg");
+            DataMap dataMap = DataMapBuilder.fromIntFile("Resources/permutate_pict.txt");
+            File outputFile = new File("Resources/image.jpg");
             ImageIO.write(dataMap.toBufferedImage(), "jpg", outputFile);
         } catch (IOException e) {
             e.printStackTrace();
