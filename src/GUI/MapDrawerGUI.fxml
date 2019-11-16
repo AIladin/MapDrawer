@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MapDrawerController">
+<VBox fx:id="root" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MapDrawerController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="Open…" />
+            <MenuItem fx:id="openMenu" mnemonicParsing="false" onAction="#openMenuEvent" text="Open…" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="saveAsMenu" mnemonicParsing="false" onAction="#saveAsMenu" text="Save As…" />
           </items>
         </Menu>
       </menus>
@@ -31,10 +30,15 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <Canvas height="544.0" layoutX="14.0" layoutY="14.0" width="571.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+                        <ImageView fx:id="imageView" fitHeight="536.0" fitWidth="563.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                        <ImageView fx:id="imageHighlight" fitHeight="536.0" fitWidth="563.0" layoutX="19.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="508.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="508.0">
+                     <children>
+                        <ChoiceBox fx:id="choiceBox" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="178.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                        <Button fx:id="refreshButton" layoutX="14.0" layoutY="534.0" mnemonicParsing="false" onAction="#refreshEvent" prefHeight="25.0" prefWidth="158.0" text="Refresh Image" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="534.0" />
+                     </children></AnchorPane>
               </items>
             </SplitPane>
          </children>

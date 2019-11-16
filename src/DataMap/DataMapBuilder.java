@@ -16,9 +16,8 @@ public class DataMapBuilder {
         return new Color(Color.HSBtoRGB(hue, 1, 0.5f));
     }
 
-    static public DataMap fromIntFile(String filename) throws FileNotFoundException {
+    public static DataMap fromIntFile(File file) throws FileNotFoundException {
         DataMap dm = new DataMap();
-        File file = new File(filename);
         Scanner scanner = new Scanner(file);
 
         int n = scanner.nextInt();
