@@ -10,19 +10,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MapDrawerController {
 
@@ -85,18 +85,46 @@ public class MapDrawerController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        refreshButton.setDisable(false);
         refreshEvent(null);
     }
 
     @FXML
     void refreshEvent(ActionEvent event) {
-        imageView.setImage(DataMapExporter.toWritableImage(dataMap));
-        subMenuController.setDataMap(dataMap);
+        setHighlight(false);
+        if (dataMap!=null) {
+            imageView.setImage(DataMapExporter.toWritableImage(dataMap));
+        }
+        if (subMenuController != null) {
+            subMenuController.setDataMap(dataMap.copy());
+        }
+    }
+
+    void setHighlight(Boolean state){
+        if (subMenuController!=null) {
+            subMenuController.setHighlight(false);
+        }
     }
 
     @FXML
     void saveAsMenu(ActionEvent event) {
+        if (dataMap != null) {
+            FileChooser fileChooser = new FileChooser();
 
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                    "PNG files (*.png)", "*.png");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            File file = fileChooser.showSaveDialog(stage);
+
+            if (file != null) {
+                try {
+                    ImageIO.write(DataMapExporter.toBufferedImage(this.dataMap), "png", file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void setStage(Stage stage) {
@@ -106,7 +134,6 @@ public class MapDrawerController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-
 
     public void setSubMenuController(SubMenuController subMenuController) {
         this.subMenuController = subMenuController;

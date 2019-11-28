@@ -3,6 +3,7 @@ package DataMap;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DataMapBuilder {
@@ -36,5 +37,26 @@ public class DataMapBuilder {
         dm.setWidth(m);
         dm.setColorMap(colorMap);
         return dm;
+    }
+
+    public static DataMap fromColorMap(Color[][] colorMap){
+        DataMap dm = new DataMap();
+        dm.setColorMap(deepCopy(colorMap));
+        dm.setHeight(colorMap.length);
+        dm.setWidth(colorMap[0].length);
+        return dm;
+    }
+
+    private static Color[][] deepCopy(Color[][] original) {
+        if (original == null) {
+            return null;
+        }
+
+        Color[][] result = new Color[original.length][];
+        for (int i = 0; i < original.length; i++) {
+            result[i] = Arrays.copyOf(original[i], original[i].length);
+
+        }
+        return result;
     }
 }

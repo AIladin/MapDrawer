@@ -6,7 +6,6 @@ import java.util.Queue;
 
 class ConnectedAreasExecutor {
     private Color[][] colorMap;
-    private Queue<Node> queue;
     private Color transparent = new Color(0,0,0,0);
 
     private static class Node{
@@ -63,7 +62,7 @@ class ConnectedAreasExecutor {
     {
         int count=0;
         Color mainColor = colorMap[y][x];
-        queue= new LinkedList<>();
+        Queue<Node> queue = new LinkedList<>();
         queue.add(new Node(x, y));
         Node currentNode;
         colorMap[y][x] = Color.GRAY;

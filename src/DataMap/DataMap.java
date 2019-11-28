@@ -1,5 +1,6 @@
 package DataMap;
 
+import javax.xml.crypto.Data;
 import java.awt.*;
 
 public class DataMap {
@@ -7,10 +8,6 @@ public class DataMap {
     public enum HighlightType{
         ONE_COLOR("One color"),
         CONNECTED_AREA("Connected Area"),
-        SQUARE_AREA("Square Area"),
-        LINES("Lines"),
-        POLYGONS("Polygons"),
-        ELLIPSE("Ellipse"),
         ;
         private String name;
 
@@ -55,5 +52,13 @@ public class DataMap {
     public Result getConnectedAreas(){
         ConnectedAreasExecutor connectedAreasExecutor = new ConnectedAreasExecutor();
         return connectedAreasExecutor.maxConnectedArea(this);
+    }
+
+    public int getColorCount(Color color){
+        return FindColorExecutor.countColor(color, this);
+    }
+
+    public DataMap copy(){
+        return DataMapBuilder.fromColorMap(colorMap);
     }
 }

@@ -5,11 +5,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 
 public class ConnectedAreaController implements SubMenuController {
@@ -28,9 +26,6 @@ public class ConnectedAreaController implements SubMenuController {
 
     private AnchorPane rootLayout;
 
-    @FXML
-    private Button calculateButton;
-
     private DataMap dataMap;
 
     private ImageView imageViewHighlight;
@@ -47,7 +42,11 @@ public class ConnectedAreaController implements SubMenuController {
                 imageViewHighlight.setVisible(newValue);
             }
         });
+    }
 
+    @Override
+    public void setHighlight(Boolean stat) {
+        highlightBox.setSelected(stat);
     }
 
     @Override
@@ -66,14 +65,7 @@ public class ConnectedAreaController implements SubMenuController {
     }
 
     @Override
-    public WritableImage getWritableImage() {
-        return null;
-    }
-
-    @Override
     public void setHighlighted(ImageView imageView) {
         this.imageViewHighlight = imageView;
     }
-
-
 }

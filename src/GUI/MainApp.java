@@ -53,12 +53,18 @@ public class MainApp extends Application {
             switch (highlightType) {
                 case CONNECTED_AREA:
                     loader.setLocation(MainApp.class.getResource("SubMenu/ConnectedArea.fxml"));
-                    root = loader.load();
-                    subMenuController = loader.getController();
-                    subMenuController.setRootLayout(root);
-                    mainController.setSubMenuController(subMenuController);
+                    break;
+                case ONE_COLOR:
+                    loader.setLocation(MainApp.class.getResource("SubMenu/ColorCount.fxml"));
                     break;
             }
+            root = loader.load();
+            subMenuController = loader.getController();
+            subMenuController.setRootLayout(root);
+            mainController.setHighlight(false);
+            mainController.setSubMenuController(subMenuController);
+            mainController.refreshEvent(null);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

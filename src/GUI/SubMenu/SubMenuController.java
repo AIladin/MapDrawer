@@ -15,10 +15,10 @@ public interface SubMenuController {
 
     public void setDataMap(DataMap dataMap);
 
-    public WritableImage getWritableImage();
-
     public void setHighlighted(ImageView imageView);
 
     @FXML
     void calculateEvent(ActionEvent event);
+
+    void setHighlight(Boolean stat);
 }
